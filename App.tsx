@@ -30,7 +30,7 @@ function App() {
           <Sparkles className="text-cyan-300 animate-pulse" size={32} />
         </h1>
         <p className="text-lg text-cyan-100/80 font-medium tracking-wide mt-1">
-          Dreamy Ocean
+          Created by CoopyZhou
         </p>
       </div>
 
