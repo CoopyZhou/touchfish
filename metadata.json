@@ -1,5 +1,5 @@
 {
   "name": "TouchFish",
-  "description": "An interactive, generative underwater world featuring lively flocking fish, drifting jellyfish, and dynamic lighting effects. Interact with the marine life using your mouse.",
+  "description": "Inspired by the Chinese slang 'Moyu' (slacking off), TouchFish is a relaxing digital aquarium. Feed or scare the fish, watch them flock, and click to create bubbles in this interactive underwater world.",
   "requestFramePermissions": []
 }
