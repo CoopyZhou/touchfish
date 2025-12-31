@@ -24,8 +24,8 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
   return (
     <div className="absolute top-6 right-6 w-80 bg-slate-900/60 backdrop-blur-xl rounded-3xl border border-white/20 text-white shadow-2xl p-6 z-50 animate-fade-in transition-all">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold flex items-center gap-2 text-pink-200">
-            <span className="text-pink-400">TouchFish</span> Controls
+        <h2 className="text-xl font-bold flex items-center gap-2 text-cyan-100">
+            <span className="text-cyan-400">TouchFish</span> Controls
         </h2>
         <button 
             onClick={() => setIsOpen(false)}
@@ -38,7 +38,7 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
       <div className="space-y-6">
         {/* Interaction Mode */}
         <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-wider text-pink-200/70 flex items-center gap-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-cyan-200/70 flex items-center gap-2">
                 <MousePointer2 size={14} /> Interaction
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -48,7 +48,7 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
                         onClick={() => setConfig(prev => ({ ...prev, interactionMode: InteractionMode[mode] }))}
                         className={`text-xs py-2 rounded-xl border transition-all font-medium ${
                             config.interactionMode === InteractionMode[mode]
-                            ? 'bg-pink-500/30 border-pink-400 text-pink-100 shadow-[0_0_10px_rgba(236,72,153,0.3)]' 
+                            ? 'bg-cyan-500/30 border-cyan-400 text-cyan-100 shadow-[0_0_10px_rgba(34,211,238,0.3)]' 
                             : 'border-white/10 hover:bg-white/10 text-slate-300'
                         }`}
                     >
@@ -56,7 +56,7 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
                     </button>
                 ))}
             </div>
-            <p className="text-xs text-pink-100/60 text-center italic">
+            <p className="text-xs text-cyan-100/60 text-center italic">
                 {config.interactionMode === 'ATTRACT' && "Fish flock to your cursor."}
                 {config.interactionMode === 'REPEL' && "Fish swim away from danger."}
                 {config.interactionMode === 'IDLE' && "Fish swim peacefully."}
@@ -65,7 +65,7 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
 
         {/* Fish Count */}
         <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-pink-200/70 flex items-center gap-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-cyan-200/70 flex items-center gap-2">
                 <Fish size={14} /> Population: {config.fishCount}
             </label>
             <input 
@@ -74,13 +74,13 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
                 max="300" 
                 value={config.fishCount}
                 onChange={(e) => setConfig(prev => ({ ...prev, fishCount: parseInt(e.target.value) }))}
-                className="w-full h-2 bg-slate-700/50 rounded-lg appearance-none cursor-pointer accent-pink-400"
+                className="w-full h-2 bg-slate-700/50 rounded-lg appearance-none cursor-pointer accent-cyan-400"
             />
         </div>
 
         {/* Speed */}
         <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-pink-200/70 flex items-center gap-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-cyan-200/70 flex items-center gap-2">
                 <Activity size={14} /> Speed: {config.baseSpeed}x
             </label>
             <input 
@@ -90,23 +90,23 @@ const Controls: React.FC<ControlsProps> = ({ config, setConfig }) => {
                 step="0.1"
                 value={config.baseSpeed}
                 onChange={(e) => setConfig(prev => ({ ...prev, baseSpeed: parseFloat(e.target.value) }))}
-                className="w-full h-2 bg-slate-700/50 rounded-lg appearance-none cursor-pointer accent-pink-400"
+                className="w-full h-2 bg-slate-700/50 rounded-lg appearance-none cursor-pointer accent-cyan-400"
             />
         </div>
 
         {/* Theme */}
         <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-pink-200/70 flex items-center gap-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-cyan-200/70 flex items-center gap-2">
                 <Palette size={14} /> Mood
             </label>
             <div className="flex gap-3">
                  {/* Deep Blue */}
                  <button
                     onClick={() => setConfig(prev => ({ ...prev, waterColorStart: '#0f172a', waterColorEnd: '#0ea5e9' }))}
-                    className={`flex-1 h-10 rounded-2xl bg-gradient-to-br from-[#0f172a] to-[#0ea5e9] ring-2 ring-offset-2 ring-offset-slate-900 transition-transform hover:scale-105 ${config.waterColorStart === '#0f172a' ? 'ring-sky-400 scale-105' : 'ring-transparent opacity-70 hover:opacity-100'}`}
+                    className={`flex-1 h-10 rounded-2xl bg-gradient-to-br from-[#0f172a] to-[#0ea5e9] ring-2 ring-offset-2 ring-offset-slate-900 transition-transform hover:scale-105 ${config.waterColorStart === '#0f172a' ? 'ring-cyan-400 scale-105' : 'ring-transparent opacity-70 hover:opacity-100'}`}
                     title="Deep Ocean"
                  />
-                 {/* Dreamy Pink (Replaces Purple) */}
+                 {/* Dreamy Pink */}
                  <button
                     onClick={() => setConfig(prev => ({ ...prev, waterColorStart: '#4a044e', waterColorEnd: '#f472b6' }))}
                     className={`flex-1 h-10 rounded-2xl bg-gradient-to-br from-[#4a044e] to-[#f472b6] ring-2 ring-offset-2 ring-offset-slate-900 transition-transform hover:scale-105 ${config.waterColorStart === '#4a044e' ? 'ring-pink-400 scale-105' : 'ring-transparent opacity-70 hover:opacity-100'}`}

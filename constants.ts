@@ -6,8 +6,8 @@ export const DEFAULT_CONFIG: SimulationConfig = {
   interactionMode: InteractionMode.ATTRACT,
   showDebug: false,
   baseSpeed: 2,
-  waterColorStart: '#4a044e', // Start with the new Dreamy Pink theme
-  waterColorEnd: '#f472b6',   
+  waterColorStart: '#0f172a', // Deep Ocean Blue
+  waterColorEnd: '#0ea5e9',   // Sky Blue
 };
 
 export const FISH_COLORS = [
