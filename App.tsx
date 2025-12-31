@@ -3,7 +3,7 @@ import UnderwaterCanvas from './components/UnderwaterCanvas';
 import Controls from './components/Controls';
 import { SimulationConfig, InteractionMode } from './types';
 import { DEFAULT_CONFIG } from './constants';
-import { Info } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 function App() {
   const [config, setConfig] = useState<SimulationConfig>(DEFAULT_CONFIG);
@@ -24,21 +24,22 @@ function App() {
       <Controls config={config} setConfig={setConfig} />
 
       {/* Title / Watermark */}
-      <div className="absolute bottom-6 left-6 pointer-events-none opacity-50 z-10">
-        <h1 className="text-4xl font-black text-white tracking-tighter mix-blend-overlay">
-          LUMINA
+      <div className="absolute bottom-8 left-8 pointer-events-none opacity-60 z-10 text-white">
+        <h1 className="text-5xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-pink-200 drop-shadow-lg flex items-center gap-3">
+          TouchFish
+          <Sparkles className="text-pink-300 animate-pulse" size={32} />
         </h1>
-        <p className="text-sm text-cyan-200 font-light tracking-widest uppercase">
-          Interactive Generative Ocean
+        <p className="text-lg text-pink-100/80 font-medium tracking-wide mt-1">
+          Dreamy Ocean
         </p>
       </div>
 
       {/* Instructions Tip */}
       <div 
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white/90 text-sm font-medium border border-white/10 shadow-xl transition-opacity duration-1000 pointer-events-none flex items-center gap-2 ${showTip ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute bottom-10 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-xl px-8 py-4 rounded-full text-white font-medium border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-opacity duration-1000 pointer-events-none flex items-center gap-3 ${showTip ? 'opacity-100' : 'opacity-0'}`}
       >
-        <Info size={16} className="text-cyan-400" />
-        Click anywhere to create bubbles!
+        <Sparkles size={18} className="text-pink-300" />
+        <span className="tracking-wide">Click to create magic bubbles!</span>
       </div>
     </div>
   );

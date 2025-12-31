@@ -260,17 +260,21 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
   };
 
   const drawBubbles = (ctx: CanvasRenderingContext2D) => {
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
     bubblesRef.current.forEach(b => {
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen'; // Make them sparkly
+      ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.sin(timeRef.current * 0.1 + b.id) * 0.2})`; // Twinkle
+      
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
       ctx.fill();
+      
       // Shine
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
       ctx.beginPath();
-      ctx.arc(b.x - b.radius*0.3, b.y - b.radius*0.3, b.radius*0.2, 0, Math.PI * 2);
+      ctx.arc(b.x - b.radius*0.3, b.y - b.radius*0.3, b.radius*0.25, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)'; // reset
+      ctx.restore();
     });
   };
 
@@ -280,7 +284,7 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
     
     // Create gradient rays
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.15)');
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
     gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
     ctx.fillStyle = gradient;
@@ -335,10 +339,6 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
     updateJellyfish(width, height);
     timeRef.current += 1;
 
-    // Draw Background Gradient (if not done in CSS, but CSS is faster for static bg)
-    // We rely on parent container CSS for base gradient, but let's add a "deep water" overlay
-    // No, let's keep it transparent to use CSS gradient efficiently.
-
     // Draw Entities
     // Order matters for layering
     drawJellyfish(ctx); // Back
@@ -347,7 +347,7 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
     drawLightRays(ctx, width, height); // Top Overlay
 
     animationFrameRef.current = requestAnimationFrame(render);
-  }, [config.interactionMode]); // Re-create render if major config changes (though usually refs handle dynamic values)
+  }, [config.interactionMode]);
 
   // --- Effects ---
 
@@ -433,14 +433,14 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
       const y = e.clientY - rect.top;
       
       // Spawn bubbles
-      for(let i=0; i<5; i++) {
+      for(let i=0; i<8; i++) {
         bubblesRef.current.push({
             id: Date.now() + i,
-            x: x + (Math.random() - 0.5) * 20,
-            y: y + (Math.random() - 0.5) * 20,
-            vx: (Math.random() - 0.5) * 1,
-            vy: -1 - Math.random() * 2,
-            radius: 2 + Math.random() * 5,
+            x: x + (Math.random() - 0.5) * 30,
+            y: y + (Math.random() - 0.5) * 30,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: -1 - Math.random() * 3,
+            radius: 2 + Math.random() * 6,
             alpha: 1
         });
       }
@@ -452,7 +452,7 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
   return (
     <div 
         ref={containerRef} 
-        className="relative w-full h-full overflow-hidden"
+        className="relative w-full h-full overflow-hidden transition-colors duration-1000 ease-in-out"
         style={{
             background: `linear-gradient(to bottom, ${config.waterColorStart}, ${config.waterColorEnd})`
         }}
@@ -465,7 +465,7 @@ const UnderwaterCanvas: React.FC<UnderwaterCanvasProps> = ({ config, onCanvasCli
         className="block cursor-crosshair active:cursor-grabbing"
       />
       {/* Optional ambient overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-blue-500 opacity-10 mix-blend-overlay"></div>
+      <div className="absolute inset-0 pointer-events-none bg-blue-500 opacity-5 mix-blend-overlay"></div>
     </div>
   );
 };
